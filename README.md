@@ -10,18 +10,18 @@ L'élève complète une évaluation de chaque source en dix questions et un scor
 
 ## Utilisation
 
-Ouvrir `fiabilitometre.html` dans un navigateur, ou accéder directement à la page en ligne :  
+Ouvrir `index.html` dans un navigateur, ou accéder directement à la page en ligne :  
 👉 https://glorget.github.io/fiabilitometre/
 
 ## Structure
 
 Le projet repose sur deux fichiers :
 
-- `fiabilitometre.html` — l'interface interactive (moteur de l'application, ne nécessite pas de modification)
+- `index.html` — l'interface interactive (moteur de l'application, ne nécessite pas de modification)
 - `data.json` — les contenus : thèmes, publications, réponses attendues et feedbacks
 
 Pour **ajouter un nouveau thème ou une nouvelle publication**, il suffit d'éditer `data.json` 
-directement sur GitHub, sans toucher à `fiabilitometre.html`.
+directement sur GitHub, sans toucher à `index.html`.
 
 ## Thèmes disponibles
 
