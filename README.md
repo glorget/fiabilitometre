@@ -11,7 +11,7 @@ L'élève complète une évaluation de chaque source en dix questions et un scor
 ## Utilisation
 
 Ouvrir `fiabilitometre.html` dans un navigateur, ou accéder directement à la page en ligne :  
-👉 https://glorget.github.io/fiabilitometre.html
+👉 https://glorget.github.io/fiabilitometre/
 
 ## Structure
 
