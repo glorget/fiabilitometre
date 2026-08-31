@@ -2,7 +2,7 @@
   "themes": [
     {
       "id": "soutien-gorge",
-      "label": "Soutien-gorge et cancer du sein",
+      "label": "Soutien-gorge et cancer du sein (Tous niveaux)",
       "publications": [
         {
           "id": "inserm-canal-detox",
@@ -90,7 +90,7 @@
     },
     {
       "id": "boissons-energisantes",
-      "label": "Boissons énergisantes et santé",
+      "label": "Boissons énergisantes et santé (1ère)",
       "publications": [
         {
           "id": "anses",
