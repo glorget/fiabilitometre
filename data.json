@@ -11,19 +11,19 @@
           "label": "Publication 1 — INSERM Canal Détox",
           "url": "https://presse.inserm.fr/canal-detox/le-soutien-gorge-mis-en-cause-dans-le-cancer-du-sein-vraiment/",
           "answers": [true, true, true, true, true, true, true, true, true, true],
-          "scoreExpected": 9,
-          "scoreNote": "Cette publication obtient un score très élevé : institution publique légitime, sources vérifiables, ton neutre, démarche scientifique rigoureuse et savoir collectif validé.",
+          "scoreExpected": 10,
+          "scoreNote": "Cette publication obtient un score maximal : institution publique légitime, sources vérifiables, ton neutre, démarche scientifique rigoureuse et savoir collectif validé.",
           "feedbackTrue": {
             "0": "✓ L'Inserm est clairement identifié comme institution responsable de la publication.",
             "1": "✓ L'Inserm est un organisme public de recherche biomédicale, facilement identifiable.",
-            "2": "✓ L'Inserm est l'institution de référence en recherche médicale en France — pleinement légitime.",
+            "2": "✓ L'Inserm est l'institution de référence en recherche médicale en France : source totalement légitime.",
             "3": "✓ L'Inserm est un organisme public sans intérêt commercial identifiable sur ce sujet.",
-            "4": "✓ Le titre questionne directement (« vraiment ? ») et le ton est factuel et mesuré tout au long de l'article.",
+            "4": "✓ Le titre questionne directement (« vraiment ? »), le ton est factuel et mesuré tout au long de l'article.",
             "5": "✓ Les conclusions de l'Inserm sont cohérentes avec celles de l'INCa, de l'OMS et de l'ACS.",
             "6": "✓ L'article cite une étude américaine de 2014 publiée dans une revue à comité de lecture, consultable.",
             "7": "✓ L'étude citée est publiée dans une revue à comité de lecture, non controversée.",
-            "8": "✓ L'étude citée par l'Inserm porte sur plus de 1 500 femmes avec groupe témoin — démarche scientifique solide.",
-            "9": "✓ L'étude de l'Inserm est publiée dans une revue à comité de lecture et fait consensus — le lien soutien-gorge / cancer n'est pas établi."
+            "8": "✓ L'étude citée par l'Inserm porte sur plus de 1 500 femmes avec groupe témoin : démarche scientifique solide.",
+            "9": "✓ L'étude de l'Inserm est publiée dans une revue à comité de lecture et fait consensus ; le lien soutien-gorge / cancer n'est pas établi."
           },
           "feedbackFalse": {
             "0": "L'institution Inserm est visible en en-tête. La bonne réponse est VRAI.",
@@ -34,7 +34,7 @@
             "5": "Les grandes institutions de lutte contre le cancer confirment toutes l'absence de lien établi entre soutien-gorge et cancer. La bonne réponse est VRAI.",
             "6": "L'Inserm cite explicitement une étude avec les éléments permettant de la retrouver. La bonne réponse est VRAI.",
             "7": "L'étude de référence citée par l'Inserm est une étude épidémiologique rigoureuse. La bonne réponse est VRAI.",
-            "8": "L'étude citée porte sur plus de 1 500 femmes avec groupe témoin — démarche scientifique solide. La bonne réponse est VRAI.",
+            "8": "L'étude citée porte sur plus de 1 500 femmes avec groupe témoin, c'est une démarche scientifique solide. La bonne réponse est VRAI.",
             "9": "L'étude est publiée dans une revue à comité de lecture et fait consensus scientifique. La bonne réponse est VRAI."
           }
         },
@@ -43,8 +43,8 @@
           "label": "Publication 2 — Miss Mary (blog lingerie)",
           "url": "https://www.missmary.fr/fr/blog/myth-or-fact-can-underwired-bra-increase-your-risk-breast-cancer",
           "answers": [true, true, false, false, true, true, true, false, false, false],
-          "scoreExpected": 4,
-          "scoreNote": "Score moyen : l'auteur est identifiable et le ton correct, mais le conflit d'intérêt commercial (marque de lingerie) et l'absence de légitimité médicale pénalisent fortement la fiabilité.",
+          "scoreExpected": 5,
+          "scoreNote": "Score moyen : l'auteur est identifiable et le ton correct, mais le conflit d'intérêt commercial (marque de lingerie) et l'absence de légitimité médicale fragilisent fortement la fiabilité.",
           "feedbackTrue": {
             "0": "✓ Miss Mary est clairement identifiée comme marque responsable du blog.",
             "1": "✓ Le statut commercial de Miss Mary (marque de lingerie) est transparent et trouvable.",
@@ -77,8 +77,8 @@
           },
           "feedbackFalse": {
             "0": "Un auteur est bien mentionné dans l'article. La bonne réponse est VRAI.",
-            "1": "L'auteur se présente comme diplômé en agronomie — statut trouvable, mais domaine éloigné de la médecine oncologique. La bonne réponse est FAUX.",
-            "2": "Avoir une formation scientifique ≠ être expert de tous les domaines. Un diplôme en agronomie ne confère pas de légitimité en cancérologie. La bonne réponse est FAUX.",
+            "1": "L'auteur se présente comme diplômé en agronomie : statut trouvable, mais domaine éloigné de la médecine oncologique. La bonne réponse est FAUX.",
+            "2": "Avoir une formation scientifique ne signifie pas être expert de tous les domaines. Un diplôme en agronomie ne confère pas de légitimité en cancérologie. La bonne réponse est FAUX.",
             "3": "AlternativSanté est un média promouvant des médecines alternatives, ce qui peut orienter la sélection et la présentation des informations. La bonne réponse est FAUX.",
             "4": "Le titre d'AlternativSanté est provocateur et anxiogène plutôt que factuel. La bonne réponse est FAUX.",
             "5": "Les affirmations d'AlternativSanté ne sont pas confirmées par les grandes institutions médicales internationales. La bonne réponse est FAUX.",
@@ -94,19 +94,19 @@
       "id": "boissons-energisantes",
       "label": "Boissons énergisantes et santé",
       "matiere": "SVT",
-      "niveaux": ["4e", "3e", "Seconde", "Première", "Terminale"],
+      "niveaux": ["Seconde", "Première", "Terminale"],
       "publications": [
         {
           "id": "anses",
           "label": "Publication 1 — ANSES",
           "url": "https://www.anses.fr/fr/content/boissons-%C3%A9nergisantes-quels-effets-sur-la-sant%C3%A9",
           "answers": [true, true, true, true, true, true, true, true, true, true],
-          "scoreExpected": 9,
-          "scoreNote": "Score très élevé : institution publique de référence en sécurité sanitaire, sans conflit d'intérêt, s'appuyant sur son propre rapport scientifique de 2013 et les données de l'EFSA. Ton neutre et factuel.",
+          "scoreExpected": 10,
+          "scoreNote": "Score maximal : institution publique de référence en sécurité sanitaire, sans conflit d'intérêt, s'appuyant sur son propre rapport scientifique de 2013 et les données de l'EFSA. Ton neutre et factuel.",
           "feedbackTrue": {
             "0": "✓ L'ANSES est clairement identifiée comme institution responsable.",
             "1": "✓ Le statut de l'ANSES (agence publique d'expertise sanitaire) est facilement trouvable.",
-            "2": "✓ L'ANSES est l'institution française de référence en matière de sécurité sanitaire — pleinement légitime.",
+            "2": "✓ L'ANSES est l'institution française de référence en matière de sécurité sanitaire : totalement légitime.",
             "3": "✓ L'ANSES est un organisme public indépendant, sans intérêt commercial sur ce sujet.",
             "4": "✓ Le ton est neutre, informatif et factuel, sans sensationnalisme.",
             "5": "✓ Les conclusions de l'ANSES sont cohérentes avec celles de l'EFSA et d'autres grandes agences sanitaires.",
@@ -133,7 +133,7 @@
           "label": "Publication 2 — Blog TPE de lycéens",
           "url": "https://boissons-energisantes-tpe.overblog.com/partie-i-impact-sur-le-corps",
           "answers": [true, false, false, false, false, false, false, false, false, false],
-          "scoreExpected": 2,
+          "scoreExpected": 1,
           "scoreNote": "Score très bas : les auteurs (trois lycéens de 1ère S) sont identifiables mais sans légitimité scientifique. L'expérience est menée sur un seul élève sans protocole rigoureux. Les sources primaires sont absentes ou non consultables.",
           "feedbackTrue": {
             "0": "✓ Les auteurs (lycéens de 1ère S) sont clairement identifiés par leurs noms."
@@ -141,8 +141,8 @@
           "feedbackFalse": {
             "0": "Les trois lycéens auteurs du blog sont bien identifiés par leurs noms. La bonne réponse est VRAI.",
             "1": "Leur statut (élèves de lycée) est mentionné, mais cela ne suffit pas pour évaluer leur légitimité sur ce sujet scientifique. La bonne réponse est FAUX.",
-            "2": "Être élève de lycée ne confère pas de légitimité pour produire une analyse scientifique sur les effets physiologiques de substances actives. La bonne réponse est FAUX.",
-            "3": "Il n'y a pas de conflit d'intérêt commercial, mais il s'agit d'un travail scolaire sans relecture experte ni validation. La bonne réponse est FAUX.",
+            "2": "Être élève de lycée ne confère pas suffisamment de légitimité pour produire une analyse scientifique sur les effets physiologiques de substances actives. La bonne réponse est FAUX.",
+            "3": "Il n'y a pas de conflit d'intérêt commercial, mais il s'agit d'un travail scolaire sans relecture ni validation experte. La bonne réponse est FAUX.",
             "4": "Le blog mélange des informations factuelles et des affirmations non vérifiées, parfois avec un ton affirmatif non justifié. La bonne réponse est FAUX.",
             "5": "Les conclusions du blog ne sont pas confirmées par des organismes de référence sérieux. La bonne réponse est FAUX.",
             "6": "Le blog ne cite pas de sources consultables et récentes. La bonne réponse est FAUX.",
@@ -156,7 +156,7 @@
           "label": "Publication 3 — ELLE.be",
           "url": "https://www.elle.be/fr/370594-5-bienfaits-boissons-energisantes.html",
           "answers": [false, true, false, false, false, false, false, false, false, false],
-          "scoreExpected": 2,
+          "scoreExpected": 1,
           "scoreNote": "Score très bas : l'auteur n'est pas identifiable (« La rédaction »), le magazine n'a aucune légitimité médicale, l'article fait la promotion d'une marque spécifique (Holy Energy) avec lien affilié. Aucune source scientifique citée.",
           "feedbackTrue": {
             "1": "✓ Le statut d'ELLE.be (magazine féminin belge) est facilement trouvable."
@@ -165,7 +165,7 @@
             "0": "L'auteur est mentionné comme « La rédaction » — aucun individu identifiable. La bonne réponse est FAUX.",
             "1": "Le statut d'ELLE.be est facilement trouvable sur le web. La bonne réponse est VRAI.",
             "2": "Un magazine de mode et lifestyle n'a aucune légitimité pour produire du contenu médical ou nutritionnel fiable. La bonne réponse est FAUX.",
-            "3": "L'article fait la promotion de la marque Holy Energy avec un lien affilié — conflit d'intérêt commercial évident. La bonne réponse est FAUX.",
+            "3": "L'article fait la promotion de la marque Holy Energy avec un lien affilié : conflit d'intérêt commercial évident. La bonne réponse est FAUX.",
             "4": "Le titre (« Les 5 bienfaits ») et le contenu sont promotionnels et orientés positivement, sans nuance sur les risques. La bonne réponse est FAUX.",
             "5": "Les affirmations de l'article ne sont pas confirmées par des organismes de référence sérieux. La bonne réponse est FAUX.",
             "6": "Aucune source scientifique consultable n'est citée dans l'article. La bonne réponse est FAUX.",
