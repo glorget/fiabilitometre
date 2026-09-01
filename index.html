@@ -53,7 +53,7 @@
       border: 1px solid #818c8e;
       border-radius: 8px;
       padding: 8px 12px;
-      font-size: 11px;
+      font-size: 12px;
       color: #818c8e;
       line-height: 1.15;
       text-align: right;
@@ -148,7 +148,7 @@
     /* Section titre */
     .section-title {
       font-family: 'Source Serif 4', serif;
-      font-size: 21px;
+      font-size: 19px;
       font-weight: 600;
       color: var(--rouge);
       margin: 2rem 0 0.75rem;
@@ -507,16 +507,43 @@
   </div>
   </div>
   <div class="header-credit">
-    Adapté d'une ressource élaborée par Anne Merlin, professeure de SVT et Mélanie Serret, professeure documentaliste, disponible sur <a href="https://pedagogie.ac-lille.fr/prof-doc/fiabilito/" target="_blank" rel="noopener">le site de l'académie de Lille</a>, signalée par Nicolas Louisot, EF2D Amérique du Nord, 2026 et codé par l'outil d'intelligence artificielle générative Claude (Anthropic).
+    Adapté et développé à partir d'une ressource élaborée par Anne Merlin, professeure de SVT et Mélanie Serret, professeure documentaliste, disponible sur <a href="https://pedagogie.ac-lille.fr/prof-doc/fiabilito/" target="_blank" rel="noopener">le site de l'académie de Lille</a>, signalée par Nicolas Louisot, EF2D Amérique du Nord, 2026 et codé par l'outil d'intelligence artificielle générative Claude (Anthropic).
   </div>
 </header>
 
 <div class="container">
   <div class="pub-selector">
-    <label>Thème à analyser</label>
-    <select id="theme-select">
-      <option value="">— Choisir un thème —</option>
+    <label>Matière</label>
+    <select id="matiere-select">
+      <option value="">— Choisir une matière —</option>
+      <option value="EMI">EMI</option>
+      <option value="Français">Français</option>
+      <option value="Histoire-Géographie">Histoire-Géographie</option>
+      <option value="Physique-Chimie">Physique-Chimie</option>
+      <option value="SNT">SNT</option>
+      <option value="SVT">SVT</option>
+      <option value="toutes">Toutes matières</option>
     </select>
+    <div id="niveau-row" style="display:none;margin-top:12px;">
+      <label>Niveau</label>
+      <select id="niveau-select">
+        <option value="">— Choisir un niveau —</option>
+        <option value="6e">6e</option>
+        <option value="5e">5e</option>
+        <option value="4e">4e</option>
+        <option value="3e">3e</option>
+        <option value="Seconde">Seconde</option>
+        <option value="Première">Première</option>
+        <option value="Terminale">Terminale</option>
+        <option value="toutes">Tous niveaux</option>
+      </select>
+    </div>
+    <div id="theme-row" style="display:none;margin-top:12px;">
+      <label>Thème à analyser</label>
+      <select id="theme-select">
+        <option value="">— Choisir un thème —</option>
+      </select>
+    </div>
     <div id="pub-row" style="display:none;margin-top:12px;">
       <label>Publication à évaluer</label>
       <select id="pub-select">
@@ -649,39 +676,86 @@ fetch('data.json')
   .then(r => r.json())
   .then(data => {
     DATA = data;
-    const themeSelect = document.getElementById('theme-select');
-    data.themes.forEach(t => {
+  })
+  .catch(err => console.error('Erreur chargement data.json :', err));
+
+// Fonction utilitaire : réinitialiser depuis un niveau donné
+function resetFrom(level) {
+  const formArea = document.getElementById('form-area');
+  const introMsg = document.getElementById('intro-msg');
+  formArea.style.display = 'none';
+  introMsg.style.display = 'block';
+  document.getElementById('pub-link-area').innerHTML = '';
+  resetState();
+  if (level <= 1) {
+    document.getElementById('niveau-row').style.display = 'none';
+    document.getElementById('niveau-select').value = '';
+  }
+  if (level <= 2) {
+    document.getElementById('theme-row').style.display = 'none';
+    document.getElementById('theme-select').innerHTML = '<option value="">— Choisir un thème —</option>';
+  }
+  if (level <= 3) {
+    document.getElementById('pub-row').style.display = 'none';
+    document.getElementById('pub-select').innerHTML = '<option value="">— Choisir une publication —</option>';
+  }
+  currentTheme = null;
+}
+
+function filterThemes() {
+  const matiere = document.getElementById('matiere-select').value;
+  const niveau = document.getElementById('niveau-select').value;
+  if (!matiere || !niveau) return;
+
+  const filtered = DATA.themes.filter(t => {
+    const matiereOk = matiere === 'toutes' || t.matiere === matiere;
+    const niveauOk = niveau === 'toutes' || t.niveaux.includes(niveau);
+    return matiereOk && niveauOk;
+  });
+
+  const themeSelect = document.getElementById('theme-select');
+  themeSelect.innerHTML = '<option value="">— Choisir un thème —</option>';
+  document.getElementById('theme-row').style.display = 'block';
+
+  if (filtered.length === 0) {
+    const opt = document.createElement('option');
+    opt.disabled = true;
+    opt.textContent = 'Aucun thème disponible pour cette combinaison';
+    themeSelect.appendChild(opt);
+  } else {
+    filtered.forEach(t => {
       const opt = document.createElement('option');
       opt.value = t.id;
       opt.textContent = t.label;
       themeSelect.appendChild(opt);
     });
-  })
-  .catch(err => console.error('Erreur chargement data.json :', err));
+  }
+}
+
+// Sélection de la matière
+document.getElementById('matiere-select').addEventListener('change', function() {
+  resetFrom(1);
+  if (!this.value) return;
+  document.getElementById('niveau-row').style.display = 'block';
+});
+
+// Sélection du niveau
+document.getElementById('niveau-select').addEventListener('change', function() {
+  resetFrom(2);
+  if (!this.value) return;
+  filterThemes();
+});
 
 // Sélection du thème
 document.getElementById('theme-select').addEventListener('change', function() {
   const themeId = this.value;
-  const pubRow = document.getElementById('pub-row');
-  const pubSelect = document.getElementById('pub-select');
-  const linkArea = document.getElementById('pub-link-area');
-  const formArea = document.getElementById('form-area');
-  const introMsg = document.getElementById('intro-msg');
-
-  pubSelect.innerHTML = '<option value="">— Choisir une publication —</option>';
-  linkArea.innerHTML = '';
-  formArea.style.display = 'none';
-  introMsg.style.display = 'block';
-  resetState();
-
-  if (!themeId) {
-    pubRow.style.display = 'none';
-    currentTheme = null;
-    return;
-  }
+  resetFrom(3);
+  if (!themeId) return;
 
   currentTheme = DATA.themes.find(t => t.id === themeId);
-  pubRow.style.display = 'block';
+  const pubSelect = document.getElementById('pub-select');
+  pubSelect.innerHTML = '<option value="">— Choisir une publication —</option>';
+  document.getElementById('pub-row').style.display = 'block';
   currentTheme.publications.forEach(p => {
     const opt = document.createElement('option');
     opt.value = p.id;
