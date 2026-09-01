@@ -132,6 +132,50 @@
       border-color: var(--rouge);
     }
 
+    .niveau-checkboxes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .niveau-checkboxes label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13.5px;
+      font-weight: 400;
+      color: var(--texte);
+      text-transform: none;
+      letter-spacing: 0;
+      cursor: pointer;
+      padding: 5px 12px;
+      border: 1.5px solid var(--gris-bord);
+      border-radius: 20px;
+      background: white;
+      transition: all 0.12s;
+      user-select: none;
+    }
+
+    .niveau-checkboxes label:hover {
+      border-color: var(--rouge);
+      color: var(--rouge);
+    }
+
+    .niveau-checkboxes input[type="checkbox"] {
+      display: none;
+    }
+
+    .niveau-checkboxes input[type="checkbox"]:checked + span {
+      font-weight: 600;
+    }
+
+    .niveau-checkboxes label:has(input:checked) {
+      background: var(--rouge);
+      border-color: var(--rouge);
+      color: white;
+    }
+
     .pub-link {
       display: inline-flex;
       align-items: center;
@@ -324,6 +368,43 @@
     }
 
     .reset-btn:hover { background: var(--gris-bg); }
+
+    .themes-preview {
+      margin-top: 10px;
+      padding: 10px 14px;
+      background: var(--gris-bg);
+      border: 1px solid var(--gris-bord);
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--texte-sec);
+      line-height: 1.7;
+    }
+
+    .themes-preview .preview-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--texte-sec);
+      margin-bottom: 4px;
+    }
+
+    .themes-preview ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .themes-preview ul li::before {
+      content: "›";
+      color: var(--rouge);
+      font-weight: 700;
+      margin-right: 6px;
+    }
+
+    .themes-preview .empty-msg {
+      font-style: italic;
+    }
 
     .font-toggle-btn {
       font-family: 'DM Sans', sans-serif;
@@ -524,19 +605,19 @@
       <option value="SVT">SVT</option>
       <option value="toutes">Toutes matières</option>
     </select>
+    <div id="themes-preview" style="display:none;"></div>
     <div id="niveau-row" style="display:none;margin-top:12px;">
-      <label>Niveau</label>
-      <select id="niveau-select">
-        <option value="">— Choisir un niveau —</option>
-        <option value="6e">6e</option>
-        <option value="5e">5e</option>
-        <option value="4e">4e</option>
-        <option value="3e">3e</option>
-        <option value="Seconde">Seconde</option>
-        <option value="Première">Première</option>
-        <option value="Terminale">Terminale</option>
-        <option value="toutes">Tous niveaux</option>
-      </select>
+      <label>Niveau(x)</label>
+      <div class="niveau-checkboxes" id="niveau-checkboxes">
+        <label><input type="checkbox" value="6e"><span>6e</span></label>
+        <label><input type="checkbox" value="5e"><span>5e</span></label>
+        <label><input type="checkbox" value="4e"><span>4e</span></label>
+        <label><input type="checkbox" value="3e"><span>3e</span></label>
+        <label><input type="checkbox" value="Seconde"><span>Seconde</span></label>
+        <label><input type="checkbox" value="Première"><span>Première</span></label>
+        <label><input type="checkbox" value="Terminale"><span>Terminale</span></label>
+        <label><input type="checkbox" value="toutes"><span>Tous niveaux</span></label>
+      </div>
     </div>
     <div id="theme-row" style="display:none;margin-top:12px;">
       <label>Thème à analyser</label>
@@ -689,7 +770,8 @@ function resetFrom(level) {
   resetState();
   if (level <= 1) {
     document.getElementById('niveau-row').style.display = 'none';
-    document.getElementById('niveau-select').value = '';
+    document.querySelectorAll('#niveau-checkboxes input').forEach(cb => cb.checked = false);
+    document.getElementById('themes-preview').style.display = 'none';
   }
   if (level <= 2) {
     document.getElementById('theme-row').style.display = 'none';
@@ -702,14 +784,19 @@ function resetFrom(level) {
   currentTheme = null;
 }
 
+function getSelectedNiveaux() {
+  const checked = [...document.querySelectorAll('#niveau-checkboxes input:checked')].map(cb => cb.value);
+  return checked;
+}
+
 function filterThemes() {
   const matiere = document.getElementById('matiere-select').value;
-  const niveau = document.getElementById('niveau-select').value;
-  if (!matiere || !niveau) return;
+  const niveaux = getSelectedNiveaux();
+  if (!matiere || niveaux.length === 0) return;
 
   const filtered = DATA.themes.filter(t => {
     const matiereOk = matiere === 'toutes' || t.matiere === matiere;
-    const niveauOk = niveau === 'toutes' || t.niveaux.includes(niveau);
+    const niveauOk = niveaux.includes('toutes') || niveaux.some(n => t.niveaux.includes(n));
     return matiereOk && niveauOk;
   });
 
@@ -735,14 +822,45 @@ function filterThemes() {
 // Sélection de la matière
 document.getElementById('matiere-select').addEventListener('change', function() {
   resetFrom(1);
-  if (!this.value) return;
+  const matiere = this.value;
+  const previewDiv = document.getElementById('themes-preview');
+
+  if (!matiere) {
+    previewDiv.style.display = 'none';
+    return;
+  }
+
+  // Filtrer les thèmes par matière uniquement
+  const filtered = DATA.themes.filter(t =>
+    matiere === 'toutes' || t.matiere === matiere
+  );
+
+  previewDiv.style.display = 'block';
+  if (filtered.length === 0) {
+    previewDiv.innerHTML = '<div class="preview-title">Thèmes disponibles</div><p class="empty-msg">Aucun thème disponible pour cette matière.</p>';
+  } else {
+    const items = filtered.map(t => `<li>${t.label}</li>`).join('');
+    previewDiv.innerHTML = `<div class="preview-title">Thèmes disponibles (${filtered.length})</div><ul>${items}</ul>`;
+  }
+
   document.getElementById('niveau-row').style.display = 'block';
 });
 
-// Sélection du niveau
-document.getElementById('niveau-select').addEventListener('change', function() {
+// Sélection du/des niveau(x)
+document.getElementById('niveau-checkboxes').addEventListener('change', function() {
   resetFrom(2);
-  if (!this.value) return;
+  const niveaux = getSelectedNiveaux();
+  if (niveaux.length === 0) return;
+  // Si "Tous niveaux" coché, décocher les autres et vice-versa
+  const tousCheck = document.querySelector('#niveau-checkboxes input[value="toutes"]');
+  const autresChecks = document.querySelectorAll('#niveau-checkboxes input:not([value="toutes"])');
+  if (event.target.value === 'toutes' && tousCheck.checked) {
+    autresChecks.forEach(cb => cb.checked = false);
+  } else if (event.target.value !== 'toutes') {
+    tousCheck.checked = false;
+  }
+  const niveauxFinal = getSelectedNiveaux();
+  if (niveauxFinal.length === 0) return;
   filterThemes();
 });
 
