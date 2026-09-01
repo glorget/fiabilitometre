@@ -2,7 +2,9 @@
   "themes": [
     {
       "id": "soutien-gorge",
-      "label": "Soutien-gorge et cancer du sein (Tous niveaux)",
+      "label": "Soutien-gorge et cancer du sein",
+      "matiere": "SVT",
+      "niveaux": ["4e", "3e", "Seconde", "Première", "Terminale"],
       "publications": [
         {
           "id": "inserm-canal-detox",
@@ -90,7 +92,9 @@
     },
     {
       "id": "boissons-energisantes",
-      "label": "Boissons énergisantes et santé (1ère)",
+      "label": "Boissons énergisantes et santé",
+      "matiere": "SVT",
+      "niveaux": ["4e", "3e", "Seconde", "Première", "Terminale"],
       "publications": [
         {
           "id": "anses",
@@ -100,9 +104,9 @@
           "scoreExpected": 9,
           "scoreNote": "Score très élevé : institution publique de référence en sécurité sanitaire, sans conflit d'intérêt, s'appuyant sur son propre rapport scientifique de 2013 et les données de l'EFSA. Ton neutre et factuel.",
           "feedbackTrue": {
-            "0": "✓ L'ANSES (Agence nationale de sécurité sanitaire) est clairement identifiée comme institution responsable.",
+            "0": "✓ L'ANSES est clairement identifiée comme institution responsable.",
             "1": "✓ Le statut de l'ANSES (agence publique d'expertise sanitaire) est facilement trouvable.",
-            "2": "✓ L'ANSES est l'institution française de référence en matière de sécurité sanitaire des aliments — pleinement légitime.",
+            "2": "✓ L'ANSES est l'institution française de référence en matière de sécurité sanitaire — pleinement légitime.",
             "3": "✓ L'ANSES est un organisme public indépendant, sans intérêt commercial sur ce sujet.",
             "4": "✓ Le ton est neutre, informatif et factuel, sans sensationnalisme.",
             "5": "✓ Les conclusions de l'ANSES sont cohérentes avec celles de l'EFSA et d'autres grandes agences sanitaires.",
@@ -130,20 +134,20 @@
           "url": "https://boissons-energisantes-tpe.overblog.com/partie-i-impact-sur-le-corps",
           "answers": [true, false, false, false, false, false, false, false, false, false],
           "scoreExpected": 2,
-          "scoreNote": "Score très bas : les auteurs (trois lycéens de 1ère S) sont identifiables mais sans aucune légitimité scientifique. L'expérience est menée sur un seul élève sans protocole rigoureux. Les sources primaires sont absentes ou non consultables.",
+          "scoreNote": "Score très bas : les auteurs (trois lycéens de 1ère S) sont identifiables mais sans légitimité scientifique. L'expérience est menée sur un seul élève sans protocole rigoureux. Les sources primaires sont absentes ou non consultables.",
           "feedbackTrue": {
-            "0": "✓ Les auteurs (Léo Dunand, Tristan Laval, Iliasse Hlioua, élèves de 1ère S) sont clairement identifiés."
+            "0": "✓ Les auteurs (lycéens de 1ère S) sont clairement identifiés par leurs noms."
           },
           "feedbackFalse": {
             "0": "Les trois lycéens auteurs du blog sont bien identifiés par leurs noms. La bonne réponse est VRAI.",
-            "1": "Leur statut (élèves de lycée) est mentionné, mais le critère porte sur la légitimité pour parler du sujet — pas seulement sur la trouvabilité du statut. La bonne réponse est FAUX.",
+            "1": "Leur statut (élèves de lycée) est mentionné, mais cela ne suffit pas pour évaluer leur légitimité sur ce sujet scientifique. La bonne réponse est FAUX.",
             "2": "Être élève de lycée ne confère pas de légitimité pour produire une analyse scientifique sur les effets physiologiques de substances actives. La bonne réponse est FAUX.",
             "3": "Il n'y a pas de conflit d'intérêt commercial, mais il s'agit d'un travail scolaire sans relecture experte ni validation. La bonne réponse est FAUX.",
             "4": "Le blog mélange des informations factuelles et des affirmations non vérifiées, parfois avec un ton affirmatif non justifié. La bonne réponse est FAUX.",
             "5": "Les conclusions du blog ne sont pas confirmées par des organismes de référence sérieux. La bonne réponse est FAUX.",
-            "6": "Le blog ne cite pas de sources consultables et récentes — les informations sont présentées sans référence vérifiable. La bonne réponse est FAUX.",
+            "6": "Le blog ne cite pas de sources consultables et récentes. La bonne réponse est FAUX.",
             "7": "Les sources primaires ne sont pas citées de façon vérifiable. La bonne réponse est FAUX.",
-            "8": "L'expérience est menée sur un seul élève sans groupe témoin ni protocole rigoureux — elle n'a aucune valeur scientifique. La bonne réponse est FAUX.",
+            "8": "L'expérience est menée sur un seul élève sans groupe témoin ni protocole rigoureux. La bonne réponse est FAUX.",
             "9": "Le contenu du blog ne représente pas un savoir collectif validé par les pairs. La bonne réponse est FAUX."
           }
         },
@@ -153,12 +157,12 @@
           "url": "https://www.elle.be/fr/370594-5-bienfaits-boissons-energisantes.html",
           "answers": [false, true, false, false, false, false, false, false, false, false],
           "scoreExpected": 2,
-          "scoreNote": "Score très bas : l'auteur n'est pas identifiable individuellement (« La rédaction »), le magazine n'a aucune légitimité médicale, l'article fait la promotion d'une marque spécifique (Holy Energy) avec lien affilié — conflit d'intérêt commercial évident. Aucune source scientifique citée.",
+          "scoreNote": "Score très bas : l'auteur n'est pas identifiable (« La rédaction »), le magazine n'a aucune légitimité médicale, l'article fait la promotion d'une marque spécifique (Holy Energy) avec lien affilié. Aucune source scientifique citée.",
           "feedbackTrue": {
             "1": "✓ Le statut d'ELLE.be (magazine féminin belge) est facilement trouvable."
           },
           "feedbackFalse": {
-            "0": "L'auteur est mentionné comme « La rédaction » — aucun individu identifiable ni institution responsable clairement nommée. La bonne réponse est FAUX.",
+            "0": "L'auteur est mentionné comme « La rédaction » — aucun individu identifiable. La bonne réponse est FAUX.",
             "1": "Le statut d'ELLE.be est facilement trouvable sur le web. La bonne réponse est VRAI.",
             "2": "Un magazine de mode et lifestyle n'a aucune légitimité pour produire du contenu médical ou nutritionnel fiable. La bonne réponse est FAUX.",
             "3": "L'article fait la promotion de la marque Holy Energy avec un lien affilié — conflit d'intérêt commercial évident. La bonne réponse est FAUX.",
