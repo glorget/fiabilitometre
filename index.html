@@ -371,13 +371,13 @@
     .reset-btn:hover { background: var(--gris-bg); }
 
     .themes-preview {
-      margin-top: 10px;
-      padding: 10px 14px;
-      background: var(--gris-bg);
+      margin-top: 1.5rem;
+      padding: 14px 18px;
+      background: white;
       border: 1px solid var(--gris-bord);
-      border-radius: 8px;
+      border-radius: 12px;
       font-size: 13px;
-      color: var(--texte-sec);
+      color: #888;
       line-height: 1.7;
     }
 
@@ -386,33 +386,30 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      color: var(--texte-sec);
-      margin-bottom: 4px;
+      color: #aaa;
+      margin-bottom: 6px;
     }
 
     .themes-preview ul {
-      list-style: none !important;
-      padding: 0;
+      list-style: disc;
+      padding-left: 1.4em;
       margin: 0;
     }
 
     .themes-preview ul li {
-      list-style: none !important;
-    }
-
-    .themes-preview ul li::before {
-      content: "›";
-      color: var(--rouge);
-      font-weight: 700;
-      margin-right: 6px;
+      font-style: italic;
+      color: #888;
+      font-size: 13px;
     }
 
     .themes-preview ul li::marker {
-      content: none;
+      font-size: 10px;
+      color: #bbb;
     }
 
     .themes-preview .empty-msg {
       font-style: italic;
+      color: #aaa;
     }
 
     .font-toggle-btn {
@@ -614,7 +611,6 @@
       <option value="SVT">SVT</option>
       <option value="toutes">Toutes matières</option>
     </select>
-    <div id="themes-preview" style="display:none;"></div>
     <div id="niveau-row" style="display:none;margin-top:12px;">
       <label>Niveau(x)</label>
       <div class="niveau-checkboxes" id="niveau-checkboxes">
@@ -645,6 +641,8 @@
       <button class="font-toggle-btn" id="font-toggle-btn" title="Agrandir le texte des critères">𝐀+ Agrandir le texte</button>
     </div>
   </div>
+
+  <div id="themes-preview" style="display:none;"></div>
 
   <div id="main-area">
     <div class="intro-msg" id="intro-msg">
@@ -789,6 +787,9 @@ function resetFrom(level) {
   if (level <= 3) {
     document.getElementById('pub-row').style.display = 'none';
     document.getElementById('pub-select').innerHTML = '<option value="">— Choisir une publication —</option>';
+    // Réafficher le preview si un thème est encore affiché
+    const preview = document.getElementById('themes-preview');
+    if (preview.innerHTML) preview.style.display = 'block';
   }
   currentTheme = null;
 }
@@ -902,6 +903,9 @@ document.getElementById('pub-select').addEventListener('change', function() {
   formArea.style.display = 'none';
   introMsg.style.display = 'block';
   resetState();
+
+  // Masquer le preview quand une publication est choisie
+  document.getElementById('themes-preview').style.display = pubId ? 'none' : 'block';
 
   if (!pubId || !currentTheme) return;
 
@@ -1033,25 +1037,31 @@ function submit() {
     }
   });
 
-  const sc = SCALE_COLORS[Math.min(score, 10)];
-  const box = document.getElementById('score-box');
-  box.style.background = sc.bg;
-  box.style.color = sc.color;
-  box.className = 'score-box show';
-  document.getElementById('score-number').textContent = score + ' / 10';
-  document.getElementById('score-mention').textContent = '— ' + sc.mention;
+  // Score de fiabilité de la publication = nombre de VRAI dans les réponses attendues
+  const pubReliabilityScore = currentPub.answers.filter(a => a === true).length;
 
+  // Performance de l'élève
   const correct_count = answers.filter((a, i) => a !== null && a !== 'ne' && a === currentPub.answers[i]).length;
   const ne_wrong = answers.filter((a, i) => a === 'ne' && currentPub.answers[i] !== null).length;
   const wrong = answers.filter((a, i) => a !== null && a !== 'ne' && a !== currentPub.answers[i]).length + ne_wrong;
   const ne_ok = answers.filter((a, i) => a === 'ne' && currentPub.answers[i] === null).length;
+
+  // Affichage basé sur le score de fiabilité de la publication
+  const sc = SCALE_COLORS[Math.min(pubReliabilityScore, 10)];
+  const box = document.getElementById('score-box');
+  box.style.background = sc.bg;
+  box.style.color = sc.color;
+  box.className = 'score-box show';
+  document.getElementById('score-number').textContent = pubReliabilityScore + ' / 10';
+  document.getElementById('score-mention').textContent = '\u2014 ' + sc.mention;
+
   document.getElementById('score-detail').textContent =
-    correct_count + ' bonne(s) réponse(s) · ' + wrong + ' erreur(s)' +
-    (ne_ok > 0 ? ' · ' + ne_ok + ' N/E' : '');
+    'Ton \u00e9valuation\u00a0: ' + correct_count + ' crit\u00e8re(s) correct(s) \u00b7 ' + wrong + ' erreur(s)' +
+    (ne_ok > 0 ? ' \u00b7 ' + ne_ok + ' N/E' : '');
 
   const expectedEl = document.getElementById('score-expected');
   if (answers.some(a => a !== null)) {
-    expectedEl.textContent = 'Score attendu pour cette publication : ' + currentPub.scoreExpected + ' / 10 — ' + currentPub.scoreNote;
+    expectedEl.textContent = currentPub.scoreNote;
     expectedEl.style.display = '';
   } else {
     expectedEl.style.display = 'none';
@@ -1059,7 +1069,7 @@ function submit() {
 
   const segs = document.querySelectorAll('#scale-bar .scale-seg');
   segs.forEach(s => s.classList.remove('active-seg'));
-  if (score >= 1 && score <= 10) segs[score - 1].classList.add('active-seg');
+  if (pubReliabilityScore >= 1 && pubReliabilityScore <= 10) segs[pubReliabilityScore - 1].classList.add('active-seg');
 
   document.getElementById('submit-btn').style.display = 'none';
   document.getElementById('reset-btn').style.display = 'inline-block';
