@@ -193,7 +193,7 @@
     /* Section titre */
     .section-title {
       font-family: 'Source Serif 4', serif;
-      font-size: 19px;
+      font-size: 21px;
       font-weight: 600;
       color: var(--rouge);
       margin: 2rem 0 0.75rem;
@@ -704,7 +704,7 @@
               <div class="scale-seg" style="background:#9C27B0;color:white;">9</div>
               <div class="scale-seg" style="background:#7B1FA2;color:white;">10</div>
             </div>
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:4px;font-size:11px;color:var(--texte-sec);font-style:italic;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:4px;font-size:13px;color:var(--texte-sec);font-style:italic;">
               <span>très faible confiance</span>
               <span style="text-align:right;">très forte confiance<br>scientifique</span>
             </div>
@@ -1095,7 +1095,7 @@ document.getElementById('reset-btn').addEventListener('click', reset);
 let fontLarge = false;
 document.getElementById('font-toggle-btn').addEventListener('click', function() {
   fontLarge = !fontLarge;
-  document.documentElement.style.setProperty('--criterion-size', fontLarge ? '25px' : '18px');
+  document.documentElement.style.setProperty('--criterion-size', fontLarge ? '23px' : '18px');
   this.className = fontLarge ? 'font-toggle-btn large' : 'font-toggle-btn';
   this.textContent = fontLarge ? '𝐀− Réduire le texte' : '𝐀+ Agrandir le texte';
 });
