@@ -182,7 +182,7 @@
       align-items: center;
       gap: 5px;
       margin-top: 10px;
-      font-size: 13px;
+      font-size: 16px;
       color: var(--rouge);
       text-decoration: none;
     }
@@ -371,12 +371,14 @@
     .reset-btn:hover { background: var(--gris-bg); }
 
     .themes-preview {
+      max-height: 232px;
+      overflow-y: auto;
       margin-top: 1.5rem;
       padding: 14px 18px;
       background: white;
       border: 1px solid var(--gris-bord);
       border-radius: 12px;
-      font-size: 13px;
+      font-size: 15px;
       color: #888;
       line-height: 1.7;
     }
@@ -1095,7 +1097,7 @@ document.getElementById('reset-btn').addEventListener('click', reset);
 let fontLarge = false;
 document.getElementById('font-toggle-btn').addEventListener('click', function() {
   fontLarge = !fontLarge;
-  document.documentElement.style.setProperty('--criterion-size', fontLarge ? '23px' : '18px');
+  document.documentElement.style.setProperty('--criterion-size', fontLarge ? '22px' : '18px');
   this.className = fontLarge ? 'font-toggle-btn large' : 'font-toggle-btn';
   this.textContent = fontLarge ? '𝐀− Réduire le texte' : '𝐀+ Agrandir le texte';
 });
