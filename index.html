@@ -177,12 +177,40 @@
       font-weight: 600;
     }
 
+    .niveau-checkboxes .niveau-groupe {
+      background: #f5f0ee;
+      border-color: #c8a99a;
+      color: #8B4A3A;
+      font-weight: 600;
+    }
+
+    .niveau-checkboxes .niveau-groupe:hover {
+      border-color: var(--rouge);
+      color: var(--rouge);
+      background: #fdf0ed;
+    }
+
+    .niveau-checkboxes .niveau-groupe:has(input:checked) {
+      background: #8B4A3A;
+      border-color: #8B4A3A;
+      color: white;
+    }
+
+    .niveau-sep {
+      width: 1px;
+      background: var(--gris-bord);
+      height: 24px;
+      align-self: center;
+      margin: 0 4px;
+      flex-shrink: 0;
+    }
+
     .pub-link {
       display: inline-flex;
       align-items: center;
       gap: 5px;
       margin-top: 10px;
-      font-size: 16px;
+      font-size: 13px;
       color: var(--rouge);
       text-decoration: none;
     }
@@ -193,7 +221,7 @@
     /* Section titre */
     .section-title {
       font-family: 'Source Serif 4', serif;
-      font-size: 21px;
+      font-size: 19px;
       font-weight: 600;
       color: var(--rouge);
       margin: 2rem 0 0.75rem;
@@ -371,16 +399,16 @@
     .reset-btn:hover { background: var(--gris-bg); }
 
     .themes-preview {
-      max-height: 232px;
-      overflow-y: auto;
       margin-top: 1.5rem;
       padding: 14px 18px;
       background: white;
       border: 1px solid var(--gris-bord);
       border-radius: 12px;
-      font-size: 15px;
+      font-size: 13px;
       color: #888;
       line-height: 1.7;
+      max-height: 198px;
+      overflow-y: auto;
     }
 
     .themes-preview .preview-title {
@@ -706,7 +734,7 @@
               <div class="scale-seg" style="background:#9C27B0;color:white;">9</div>
               <div class="scale-seg" style="background:#7B1FA2;color:white;">10</div>
             </div>
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:4px;font-size:13px;color:var(--texte-sec);font-style:italic;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:4px;font-size:11px;color:var(--texte-sec);font-style:italic;">
               <span>très faible confiance</span>
               <span style="text-align:right;">très forte confiance<br>scientifique</span>
             </div>
@@ -794,11 +822,6 @@ function resetFrom(level) {
     if (preview.innerHTML) preview.style.display = 'block';
   }
   currentTheme = null;
-}
-
-function getSelectedNiveaux() {
-  const checked = [...document.querySelectorAll('#niveau-checkboxes input:checked')].map(cb => cb.value);
-  return checked;
 }
 
 function filterThemes() {
@@ -1097,7 +1120,7 @@ document.getElementById('reset-btn').addEventListener('click', reset);
 let fontLarge = false;
 document.getElementById('font-toggle-btn').addEventListener('click', function() {
   fontLarge = !fontLarge;
-  document.documentElement.style.setProperty('--criterion-size', fontLarge ? '22px' : '18px');
+  document.documentElement.style.setProperty('--criterion-size', fontLarge ? '25px' : '18px');
   this.className = fontLarge ? 'font-toggle-btn large' : 'font-toggle-btn';
   this.textContent = fontLarge ? '𝐀− Réduire le texte' : '𝐀+ Agrandir le texte';
 });
