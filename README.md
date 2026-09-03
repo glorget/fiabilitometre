@@ -33,9 +33,7 @@ la 6e jusqu'à la Terminale, avec une option "Tous niveaux".
 ## Thèmes disponibles
 
 - Soutien-gorge et cancer du sein — SVT, 4e–Terminale  
-  (3 publications : INSERM Canal Détox, Miss Mary, AlternativSanté)
-- Boissons énergisantes et santé — SVT, 4e–Terminale  
-  (3 publications : ANSES, blog TPE de lycéens, ELLE.be)
+- Boissons énergisantes et santé — SVT, 4e–Terminale
 
 ## Origine
 
