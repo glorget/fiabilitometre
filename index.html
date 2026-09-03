@@ -205,6 +205,15 @@
       flex-shrink: 0;
     }
 
+    .niveau-sep {
+      width: 1px;
+      background: var(--gris-bord);
+      height: 24px;
+      align-self: center;
+      margin: 0 4px;
+      flex-shrink: 0;
+    }
+
     .pub-link {
       display: inline-flex;
       align-items: center;
@@ -630,29 +639,24 @@
 
 <div class="container">
   <div class="pub-selector">
-    <label>Matière</label>
-    <select id="matiere-select">
-      <option value="">— Choisir une matière —</option>
-      <option value="EMI">EMI</option>
-      <option value="Français">Français</option>
-      <option value="Histoire-Géographie">Histoire-Géographie</option>
-      <option value="Physique-Chimie">Physique-Chimie</option>
-      <option value="SNT">SNT</option>
-      <option value="SVT">SVT</option>
-      <option value="toutes">Toutes matières</option>
-    </select>
-    <div id="niveau-row" style="display:none;margin-top:12px;">
-      <label>Niveau(x)</label>
-      <div class="niveau-checkboxes" id="niveau-checkboxes">
-        <label><input type="checkbox" value="6e"><span>6e</span></label>
-        <label><input type="checkbox" value="5e"><span>5e</span></label>
-        <label><input type="checkbox" value="4e"><span>4e</span></label>
-        <label><input type="checkbox" value="3e"><span>3e</span></label>
-        <label><input type="checkbox" value="Seconde"><span>Seconde</span></label>
-        <label><input type="checkbox" value="Première"><span>Première</span></label>
-        <label><input type="checkbox" value="Terminale"><span>Terminale</span></label>
-        <label><input type="checkbox" value="toutes"><span>Tous niveaux</span></label>
-      </div>
+    <label>Niveau(x)</label>
+    <div class="niveau-checkboxes" id="niveau-checkboxes">
+      <label class="niveau-groupe"><input type="checkbox" value="college" data-groupe="college"><span>Collège</span></label>
+      <label><input type="checkbox" value="6e" data-groupe="college"><span>6e</span></label>
+      <label><input type="checkbox" value="5e" data-groupe="college"><span>5e</span></label>
+      <label><input type="checkbox" value="4e" data-groupe="college"><span>4e</span></label>
+      <label><input type="checkbox" value="3e" data-groupe="college"><span>3e</span></label>
+      <div class="niveau-sep"></div>
+      <label class="niveau-groupe"><input type="checkbox" value="lycee" data-groupe="lycee"><span>Lycée</span></label>
+      <label><input type="checkbox" value="Seconde" data-groupe="lycee"><span>Seconde</span></label>
+      <label><input type="checkbox" value="Première" data-groupe="lycee"><span>Première</span></label>
+      <label><input type="checkbox" value="Terminale" data-groupe="lycee"><span>Terminale</span></label>
+    </div>
+    <div id="matiere-row" style="display:none;margin-top:12px;">
+      <label>Matière</label>
+      <select id="matiere-select">
+        <option value="">— Choisir une matière —</option>
+      </select>
     </div>
     <div id="theme-row" style="display:none;margin-top:12px;">
       <label>Thème à analyser</label>
@@ -806,9 +810,11 @@ function resetFrom(level) {
   document.getElementById('pub-link-area').innerHTML = '';
   resetState();
   if (level <= 1) {
-    document.getElementById('niveau-row').style.display = 'none';
-    document.querySelectorAll('#niveau-checkboxes input').forEach(cb => cb.checked = false);
+    document.getElementById('matiere-row').style.display = 'none';
+    document.getElementById('matiere-select').value = '';
+    document.getElementById('matiere-select').innerHTML = '<option value="">— Choisir une matière —</option>';
     document.getElementById('themes-preview').style.display = 'none';
+    document.getElementById('themes-preview').innerHTML = '';
   }
   if (level <= 2) {
     document.getElementById('theme-row').style.display = 'none';
@@ -817,11 +823,31 @@ function resetFrom(level) {
   if (level <= 3) {
     document.getElementById('pub-row').style.display = 'none';
     document.getElementById('pub-select').innerHTML = '<option value="">— Choisir une publication —</option>';
-    // Réafficher le preview si un thème est encore affiché
     const preview = document.getElementById('themes-preview');
     if (preview.innerHTML) preview.style.display = 'block';
   }
   currentTheme = null;
+}
+
+const MATIERES_PAR_NIVEAU = {"6e": ["Arts plastiques", "Éducation musicale", "Éducation physique et sportive (EPS)", "Français", "Histoire-Géographie et EMC", "Langues et cultures de l'Antiquité (LCA)", "Langues vivantes (LV1, LV2)", "Mathématiques", "Physique-Chimie", "Sciences de la vie et de la Terre (SVT)", "Technologie", "Toutes matières"], "5e": ["Arts plastiques", "Éducation musicale", "Éducation physique et sportive (EPS)", "Français", "Histoire-Géographie et EMC", "Langues et cultures de l'Antiquité (LCA)", "Langues vivantes (LV1, LV2)", "Mathématiques", "Physique-Chimie", "Sciences de la vie et de la Terre (SVT)", "Technologie", "Toutes matières"], "4e": ["Arts plastiques", "Éducation musicale", "Éducation physique et sportive (EPS)", "Français", "Histoire-Géographie et EMC", "Langues et cultures de l'Antiquité (LCA)", "Langues vivantes (LV1, LV2)", "Mathématiques", "Physique-Chimie", "Sciences de la vie et de la Terre (SVT)", "Technologie", "Toutes matières"], "3e": ["Arts plastiques", "Éducation musicale", "Éducation physique et sportive (EPS)", "Français", "Histoire-Géographie et EMC", "Langues et cultures de l'Antiquité (LCA)", "Langues vivantes (LV1, LV2)", "Mathématiques", "Physique-Chimie", "Sciences de la vie et de la Terre (SVT)", "Technologie", "Toutes matières"], "Seconde": ["Arts plastiques", "Éducation musicale", "Éducation physique et sportive (EPS)", "Français", "Histoire-Géographie et EMC", "Langues vivantes (LV1, LV2)", "Mathématiques", "Physique-Chimie", "Sciences de la vie et de la Terre (SVT)", "Sciences numériques et technologie (SNT)", "Toutes matières"], "Première": ["Arts plastiques", "Éducation musicale", "Éducation physique et sportive (EPS)", "Français", "Histoire-Géographie et EMC", "Histoire-Géographie, géopolitique et sciences politiques", "Humanités, littérature et philosophie", "Langues et littératures étrangères", "Langues vivantes (LV1, LV2)", "Mathématiques", "Numérique et sciences informatiques (NSI)", "Physique-Chimie", "Sciences économiques et sociales (SES)", "Sciences de la vie et de la Terre (SVT)", "Toutes matières"], "Terminale": ["Arts plastiques", "Éducation musicale", "Éducation physique et sportive (EPS)", "Histoire-Géographie et EMC", "Histoire-Géographie, géopolitique et sciences politiques", "Humanités, littérature et philosophie", "Langues et littératures étrangères", "Langues vivantes (LV1, LV2)", "Mathématiques", "Numérique et sciences informatiques (NSI)", "Physique-Chimie", "Sciences économiques et sociales (SES)", "Sciences de la vie et de la Terre (SVT)", "Toutes matières"]};
+const MATIERE_VALUES = {"Arts plastiques": "Arts plastiques", "Éducation musicale": "Éducation musicale", "Éducation physique et sportive (EPS)": "EPS", "Français": "Français", "Histoire-Géographie et EMC": "Histoire-Géographie", "Histoire-Géographie, géopolitique et sciences politiques": "HGGeopolSP", "Humanités, littérature et philosophie": "HLP", "Langues et cultures de l'Antiquité (LCA)": "LCA", "Langues et littératures étrangères": "LLE", "Langues vivantes (LV1, LV2)": "Langues vivantes", "Mathématiques": "Mathématiques", "Numérique et sciences informatiques (NSI)": "NSI", "Physique-Chimie": "Physique-Chimie", "Sciences économiques et sociales (SES)": "SES", "Sciences de la vie et de la Terre (SVT)": "SVT", "Sciences numériques et technologie (SNT)": "SNT", "Technologie": "Technologie", "Toutes matières": "toutes"};
+
+function getSelectedNiveaux() {
+  return [...document.querySelectorAll('#niveau-checkboxes input:checked')]
+    .map(cb => cb.value)
+    .filter(v => v !== 'college' && v !== 'lycee');
+}
+
+function getMatieresDispo(niveaux) {
+  const set = new Set();
+  niveaux.forEach(n => {
+    if (MATIERES_PAR_NIVEAU[n]) MATIERES_PAR_NIVEAU[n].forEach(m => set.add(m));
+  });
+  return [...set].sort((a, b) => {
+    if (a === 'Toutes matières') return 1;
+    if (b === 'Toutes matières') return -1;
+    return a.localeCompare(b, 'fr');
+  });
 }
 
 function filterThemes() {
@@ -831,7 +857,7 @@ function filterThemes() {
 
   const filtered = DATA.themes.filter(t => {
     const matiereOk = matiere === 'toutes' || t.matiere === matiere;
-    const niveauOk = niveaux.includes('toutes') || niveaux.some(n => t.niveaux.includes(n));
+    const niveauOk = niveaux.some(n => t.niveaux.includes(n));
     return matiereOk && niveauOk;
   });
 
@@ -854,49 +880,66 @@ function filterThemes() {
   }
 }
 
+function updateMatiereSelect() {
+  const niveaux = getSelectedNiveaux();
+  const matiereSelect = document.getElementById('matiere-select');
+  const currentVal = matiereSelect.value;
+  matiereSelect.innerHTML = '<option value="">— Choisir une matière —</option>';
+  const matieres = getMatieresDispo(niveaux);
+  matieres.forEach(label => {
+    const val = MATIERE_VALUES[label] || label;
+    const opt = document.createElement('option');
+    opt.value = val;
+    opt.textContent = label;
+    if (val === currentVal) opt.selected = true;
+    matiereSelect.appendChild(opt);
+  });
+  document.getElementById('matiere-row').style.display = niveaux.length > 0 ? 'block' : 'none';
+}
+
+// Sélection du/des niveau(x)
+document.getElementById('niveau-checkboxes').addEventListener('change', function(event) {
+  const clicked = event.target;
+  const val = clicked.value;
+  if (val === 'college') {
+    document.querySelectorAll('#niveau-checkboxes input[data-groupe="college"]:not([value="college"])').forEach(cb => cb.checked = clicked.checked);
+  } else if (val === 'lycee') {
+    document.querySelectorAll('#niveau-checkboxes input[data-groupe="lycee"]:not([value="lycee"])').forEach(cb => cb.checked = clicked.checked);
+  } else {
+    const groupe = clicked.dataset.groupe;
+    const tousNiveaux = [...document.querySelectorAll(`#niveau-checkboxes input[data-groupe="${groupe}"]:not([value="${groupe}"])`)];
+    const groupeCheck = document.querySelector(`#niveau-checkboxes input[value="${groupe}"]`);
+    if (groupeCheck) groupeCheck.checked = tousNiveaux.every(cb => cb.checked);
+  }
+  resetFrom(1);
+  const niveaux = getSelectedNiveaux();
+  if (niveaux.length === 0) return;
+  updateMatiereSelect();
+});
+
 // Sélection de la matière
 document.getElementById('matiere-select').addEventListener('change', function() {
-  resetFrom(1);
+  resetFrom(2);
   const matiere = this.value;
   const previewDiv = document.getElementById('themes-preview');
-
   if (!matiere) {
     previewDiv.style.display = 'none';
+    previewDiv.innerHTML = '';
     return;
   }
-
-  // Filtrer les thèmes par matière uniquement
-  const filtered = DATA.themes.filter(t =>
-    matiere === 'toutes' || t.matiere === matiere
-  );
-
+  const niveaux = getSelectedNiveaux();
+  const filtered = DATA.themes.filter(t => {
+    const matiereOk = matiere === 'toutes' || t.matiere === matiere;
+    const niveauOk = niveaux.some(n => t.niveaux.includes(n));
+    return matiereOk && niveauOk;
+  });
   previewDiv.style.display = 'block';
   if (filtered.length === 0) {
-    previewDiv.innerHTML = '<div class="preview-title">Thèmes disponibles</div><p class="empty-msg">Aucun thème disponible pour cette matière.</p>';
+    previewDiv.innerHTML = '<div class="preview-title">Thèmes disponibles</div><p class="empty-msg">Aucun thème disponible pour cette combinaison.</p>';
   } else {
     const items = filtered.map(t => `<li>${t.label}</li>`).join('');
     previewDiv.innerHTML = `<div class="preview-title">Thèmes disponibles (${filtered.length})</div><ul>${items}</ul>`;
   }
-
-  document.getElementById('niveau-row').style.display = 'block';
-});
-
-// Sélection du/des niveau(x)
-document.getElementById('niveau-checkboxes').addEventListener('change', function() {
-  resetFrom(2);
-  const niveaux = getSelectedNiveaux();
-  if (niveaux.length === 0) return;
-  // Si "Tous niveaux" coché, décocher les autres et vice-versa
-  const tousCheck = document.querySelector('#niveau-checkboxes input[value="toutes"]');
-  const autresChecks = document.querySelectorAll('#niveau-checkboxes input:not([value="toutes"])');
-  if (event.target.value === 'toutes' && tousCheck.checked) {
-    autresChecks.forEach(cb => cb.checked = false);
-  } else if (event.target.value !== 'toutes') {
-    tousCheck.checked = false;
-  }
-  const niveauxFinal = getSelectedNiveaux();
-  if (niveauxFinal.length === 0) return;
-  filterThemes();
 });
 
 // Sélection du thème
