@@ -199,16 +199,7 @@
     .niveau-sep {
       width: 1px;
       background: var(--gris-bord);
-      height: 24px;
-      align-self: center;
-      margin: 0 4px;
-      flex-shrink: 0;
-    }
-
-    .niveau-sep {
-      width: 1px;
-      background: var(--gris-bord);
-      height: 24px;
+      height: 28px;
       align-self: center;
       margin: 0 4px;
       flex-shrink: 0;
@@ -683,7 +674,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
       </svg>
-      Choisissez une publication pour commencer l'évaluation.
+      Faites votre sélection parmi les options du menu puis<br>Choisissez une publication pour commencer l'évaluation.
     </div>
 
     <div id="form-area" style="display:none;">
@@ -985,7 +976,7 @@ document.getElementById('pub-select').addEventListener('change', function() {
   if (currentPub.url) {
     linkArea.innerHTML = `<a class="pub-link" href="${currentPub.url}" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      Ouvrir la publication
+      Ouvrir la publication dans une nouvelle fenêtre
     </a>`;
   }
 
