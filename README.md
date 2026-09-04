@@ -17,13 +17,32 @@ Ouvrir `index.html` dans un navigateur, ou accéder directement à la page en li
 
 ## Structure
 
-Le projet repose sur deux fichiers :
+Le projet repose sur trois fichiers :
 
-- `index.html` — l'interface interactive (moteur de l'application, ne nécessite pas de modification)
+- `index.html` — l'interface interactive côté élève (moteur de l'application, ne nécessite pas de modification)
+- `editor.html` — l'éditeur en ligne côté enseignant (voir ci-dessous)
 - `data.json` — les contenus : thèmes, publications, réponses attendues et feedbacks
 
-Pour **ajouter un nouveau thème ou une nouvelle publication**, il suffit d'éditer `data.json` 
-directement sur GitHub, sans toucher à `index.html`.
+Pour **ajouter un nouveau thème ou une nouvelle publication**, deux options : éditer `data.json` 
+directement sur GitHub à la main, ou utiliser l'éditeur en ligne (voir ci-dessous), sans jamais 
+toucher à `index.html`.
+
+## Éditeur en ligne (pour les enseignants collaborateurs du dépôt)
+
+👉 https://glorget.github.io/fiabilitometre/editor.html
+
+Permet d'ajouter ou modifier un thème/une publication sans éditer le JSON à la main, avec une 
+assistance IA (Gemini) qui propose automatiquement les 10 réponses et feedbacks à partir de 
+l'URL de la source — à relire et corriger avant sauvegarde. Nécessite :
+
+- Un accès en écriture au dépôt sur GitHub (être ajouté comme collaborateur), puis un token 
+  d'accès personnel (PAT) — les instructions de création exactes sont dans l'aide en ligne 
+  de la page elle-même.
+- Optionnellement, une clé API Gemini gratuite (aistudio.google.com) pour l'assistance IA — 
+  sans clé, le formulaire reste utilisable, à remplir manuellement.
+
+Le token et la clé restent uniquement dans le navigateur de l'enseignant, jamais transmis 
+ailleurs qu'à GitHub et Google.
 
 La sélection d'un thème se fait par filtrage multi-critères : matière, niveau, puis thème.
 Les matières disponibles sont : SVT, SNT, Histoire-Géographie, Physique-Chimie, Français, EMI,
