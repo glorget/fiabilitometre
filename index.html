@@ -940,6 +940,7 @@ document.getElementById('matiere-select').addEventListener('change', function() 
     const items = filtered.map(t => `<li>${t.label}</li>`).join('');
     previewDiv.innerHTML = `<div class="preview-title">Thèmes disponibles (${filtered.length})</div><ul>${items}</ul>`;
   }
+  filterThemes();
 });
 
 // Sélection du thème
